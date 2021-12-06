@@ -9,12 +9,8 @@ class HTMLToMarkDownService {
 		const elements = dom.window.document.body.querySelectorAll("*");
 
 		elements.forEach((item) => {
-			const rawMarkdown = this.getMarkDown(item);
-
-			if(rawMarkdown !== "") {
-				markdown += rawMarkdown;
-				markdown += item.textContent;
-				markdown += "\n";
+			if(item.textContent !== "" || item.nodeName == "BR") {
+				markdown += this.getMarkDown(item) + item.textContent.replaceAll("\t", "") + "\n";
 			}
 		});
 
@@ -25,19 +21,21 @@ class HTMLToMarkDownService {
 		let markdown = "";
 
 		if (element.nodeName === "H1") {
-			markdown += "# ";
+			markdown = "# ";
 		} else if (element.nodeName === "H2") {
-			markdown += "## ";
+			markdown = "## ";
 		} else if (element.nodeName === "H3") {
-			markdown += "### ";
+			markdown = "### ";
 		} else if (element.nodeName === "H4") {
-			markdown += "#### ";
+			markdown = "#### ";
 		} else if (element.nodeName === "H5") {
-			markdown += "##### ";
+			markdown = "##### ";
 		} else if (element.nodeName === "H6") {
-			markdown += "###### ";
+			markdown = "###### ";
 		} else if (element.nodeName === "P") {
-			markdown += "";
+			markdown = "";
+		} else if (element.nodeName === "BR") {
+			markdown = "";
 		}
 
 		return markdown;
