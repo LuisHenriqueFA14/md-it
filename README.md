@@ -23,6 +23,14 @@ yarn --prod
 npm i --prod
 ```
 
+Transpile the TypeScript files:
+
+```
+yarn build
+# or
+npm run build
+```
+
 And run the NodeJS app:
 
 ```
